@@ -1,5 +1,6 @@
 import React from 'react'
 
+
 function Inputs({sub_question_title, points}) {
   return (
     <>

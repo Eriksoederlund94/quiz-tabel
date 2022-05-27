@@ -5,58 +5,56 @@ import styled from 'styled-components'
 //Components
 import Inputs from './Inputs';
 
+//Data
+import { quizData } from '../data/quizData';
+
 // Icons
 import { BsPlus, BsDash } from "react-icons/bs";
 import { v4 as randomId } from 'uuid';
 
 
 
-function QuizForm() {
-
+function QuizForm({setQuiz}) {
 
     // STATE
-    const [inputFields, setInputFields] = useState([
-        {
-            question: {
-                question_id: 1,
-                question_title: '',
-                sub_question: [
-                { sub_question_title: 'This is the title', points: 1 }
-            ] 
-            }
-        }
-    ])
+    const [inputFields, setInputFields] = useState(quizData)
 
     const startFormHandler = () => {
-        console.log(inputFields)
+        setQuiz(inputFields)
     }
     
 
     const addNewQuestionHandler = () => {
 
         setInputFields([...inputFields,  {
-            question: {
                 question_id: randomId(),
                 question_title: '',
                 sub_question: [{
                     sub_question_title: '',
                     points: '',
                 }]
-            }
         }])
     }
 
     const addFieldHandler = (id) => {
 
-    const clickedArr = inputFields.filter((items) => items.question.question_id === id)
-    
-    
-    console.log(clickedArr)
+        const newItem = {
+            sub_question_title: '',
+            points: '',
+        };
 
-        
+        setInputFields(inputFields.map((item) => {
+            if(item.question_id === id){
+                return {
+                    ...item,
+                    sub_question: [...item.sub_question, newItem]
+                }
+            }
+            return item;
+        }) )        
     }
 
-    const removeFieldHandler = () => {
+    const removeFieldHandler = (index) => {
         let inputFieldsValue = [...inputFields];
         inputFieldsValue.splice(index, 1);
         setInputFields(inputFieldsValue)
@@ -69,27 +67,29 @@ function QuizForm() {
 
     }
 
-
   return (
     <QuizFormWrapper>
         <div className='form-wrapper'>
             <h1>Make your quiz</h1>
             <input type='text' placeholder='Quiz Name' />
-            {inputFields && inputFields.map((inputs) => (
-                <div className='input-container' key={inputs.question.question_id} >
+            {inputFields && inputFields.map((inputs, index) => (
+                <div className='input-container' key={inputs.question_id} >
                     <div className='question-container' >
-                        <input type='text' name='question' value={inputs.question.question_title} placeholder='Question' onChange={event => inputChangeHandler(event)}/>
+                        <input type='text' name='question' placeholder='Question' onChange={event => inputChangeHandler(event)}/>
                         <div className='btn-container'>
                             <BsDash className='btn' onClick={() => removeFieldHandler(index)} /> <BsPlus className='btn' onClick={addNewQuestionHandler}/>
                         </div>
                     </div>
                     <div className='sub-question-container'>
-                        {inputs.question.sub_question.map((item, index) =>
+                        {inputs.sub_question.map((item, index) =>
+                        <>
                         < Inputs key={index} {...item} />
-                        )}
-                         <div className='btn-container'>
-                            <BsDash className='btn' onClick={() => removeFieldHandler()} /> <BsPlus className='btn' onClick={() => addFieldHandler(inputs.question.question_id)}/>
+                        <div className='btn-container'>
+                            <BsDash className='btn' onClick={() => removeFieldHandler()} /> <BsPlus className='btn' onClick={() => addFieldHandler(inputs.question_id)}/>
                         </div>
+                        </>
+                        )} 
+
                     </div>
                 </div>
             ))}
@@ -105,6 +105,7 @@ width: 100%;
 display: flex;
 justify-content: center;
 align-items: center;
+background-color: #CCCCC;
 
 .form-wrapper {
     display: flex;

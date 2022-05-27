@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import styled from 'styled-components'
 
 // Views
 import QuizFormPage from './views/QuizFormPage'
@@ -8,14 +9,21 @@ function App() {
 
   const [quiz, setQuiz] = useState(null) 
 
+  console.log(quiz)
+
   return (
     <div className="App">
-      <QuizFormPage setQuiz={setQuiz} /> 
+      {!quiz && <QuizFormPage setQuiz={setQuiz} /> }
       {quiz && <QuizTablePage quiz={quiz} /> }
 
      
     </div>
   )
 }
+
+const AppWrapper = styled.div`
+
+
+`
 
 export default App

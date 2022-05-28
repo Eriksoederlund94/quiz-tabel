@@ -1,26 +1,20 @@
 import React from 'react';
 
-function Inputs({ subIndex, sub_question_title, points, inputFields, parentId }) {
-  console.log(parentId);
+function Inputs({ subIndex, sub_question_title, points, inputFields, parentId, setInputFields }) {
 
   const subInputChangeHandler = (event, subIndex, id) => {
-    let inputValues = inputFields.map((item, index) => {
+    let inputValues = inputFields.map((item) => {
       if (item.question_id === id) {
-        return {
-          //let inputValues = [...inputFields];
-        };
+
+        const renameMeLaterErik = item;
+        renameMeLaterErik.sub_question[subIndex][event.target.name] = event.target.value;
+        
+        return renameMeLaterErik
       }
       return item;
     });
 
-    //inputValues[index].sub_question[index][event.target.name] = event.target.value;
-
-    //console.log(id);
-    //console.log(subIndex);
-
-    console.log(inputValues);
-
-    //setInputFields(inputValues);
+    setInputFields(inputValues);
   };
 
   return (

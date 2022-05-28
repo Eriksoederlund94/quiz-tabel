@@ -17,9 +17,9 @@ function QuizForm({ setQuiz }) {
   const [inputFields, setInputFields] = useState(quizData);
 
   const startFormHandler = () => {
-    //setQuiz(inputFields);
+    setQuiz(inputFields);
 
-    console.log(inputFields[0].sub_question[1]);
+    console.log(inputFields);
   };
 
   const addNewQuestionHandler = () => {
@@ -68,8 +68,6 @@ function QuizForm({ setQuiz }) {
   const inputChangeHandler = (event, index) => {
     let inputValues = [...inputFields];
     inputValues[index][event.target.name] = event.target.value;
-
-    console.log(index);
 
     setInputFields(inputValues);
   };

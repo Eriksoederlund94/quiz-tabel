@@ -3,9 +3,9 @@ import React from 'react'
 //Compontents
 import QuizForm from '../components/QuizForm'
 
-function QuizFormPage({setQuiz}) {
+function QuizFormPage({setQuiz, quizTitle, setQuizTitle }) {
   return (
-   < QuizForm setQuiz={setQuiz} /> 
+   < QuizForm setQuiz={setQuiz}  quizTitle={quizTitle} setQuizTitle={setQuizTitle} /> 
   )
 }
 

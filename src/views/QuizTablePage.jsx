@@ -1,9 +1,22 @@
 import React from 'react'
+import styled from 'styled-components'
 
-function QuizTable() {
+//Components
+import QuizTable from '../components/QuizTable'
+
+function QuizTablePage({quiz, quizTitle}) {
+
+  console.log(quiz)
   return (
-    <div>QuizTable</div>
+    <QuizTablePageWrapper>
+      <h1>{quizTitle}</h1>
+      {quiz.map((item, index) => (
+        < QuizTable key={item.question_id} {...item}/>
+      ))}
+    </QuizTablePageWrapper>
   )
 }
 
-export default QuizTable
+const QuizTablePageWrapper = styled.div ``
+
+export default QuizTablePage

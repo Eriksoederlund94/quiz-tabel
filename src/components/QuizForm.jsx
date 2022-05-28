@@ -12,14 +12,12 @@ import { quizData } from '../data/quizData';
 import { BsPlus, BsDash } from 'react-icons/bs';
 import { v4 as randomId } from 'uuid';
 
-function QuizForm({ setQuiz }) {
+function QuizForm({ setQuiz, quizTitle, setQuizTitle }) {
   // STATE
   const [inputFields, setInputFields] = useState(quizData);
 
   const startFormHandler = () => {
     setQuiz(inputFields);
-
-    console.log(inputFields);
   };
 
   const addNewQuestionHandler = () => {
@@ -38,6 +36,13 @@ function QuizForm({ setQuiz }) {
       },
     ]);
   };
+
+  const removeQuestiondHandler = (index) => {
+    let inputFieldsValue = [...inputFields];
+    inputFieldsValue.splice(index, 1);
+    setInputFields(inputFieldsValue);
+  };
+
 
   const addFieldHandler = (id) => {
     const newItem = {
@@ -76,7 +81,7 @@ function QuizForm({ setQuiz }) {
     <QuizFormWrapper>
       <div className='form-wrapper'>
         <h1>Make your quiz</h1>
-        <input type='text' placeholder='Quiz Name' />
+        <input type='text' placeholder='Quiz Name' value={quizTitle} onChange={(event) =>  setQuizTitle(event.target.value)} />
         {inputFields &&
           inputFields.map((inputs, index) => (
             <div className='input-container' key={inputs.question_id}>
@@ -89,7 +94,7 @@ function QuizForm({ setQuiz }) {
                   onChange={(event) => inputChangeHandler(event, index)}
                 />
                 <div className='btn-container'>
-                  <BsDash className='btn' onClick={() => removeFieldHandler(index)} />
+                  <BsDash className='btn' onClick={() => removeQuestiondHandler(index)} />
                   <BsPlus className='btn' onClick={addNewQuestionHandler} />
                 </div>
               </div>
@@ -98,7 +103,7 @@ function QuizForm({ setQuiz }) {
                 <div className='sub-question-container' key={index}>
                   <Inputs
                     {...item}
-                    subIndex={index}
+                    index={index}
                     inputFields={inputFields}
                     parentId={inputs.question_id}
                     setInputFields={setInputFields}

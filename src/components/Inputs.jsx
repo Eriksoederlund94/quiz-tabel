@@ -9,7 +9,7 @@ function Inputs({ index, sub_question_title, points, inputFields, parentId, setI
         const changedSubInputValue = item;
         changedSubInputValue.sub_question[index][event.target.name] = event.target.value;
 
-        return renameMeLaterErik
+        return changedSubInputValue
       }
       return item;
     });

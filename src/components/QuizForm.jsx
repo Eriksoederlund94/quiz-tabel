@@ -64,10 +64,18 @@ function QuizForm({ setQuiz, quizTitle, setQuizTitle }) {
     );
   };
 
-  const removeFieldHandler = (index) => {
-    let inputFieldsValue = [...inputFields];
-    inputFieldsValue.splice(index, 1);
-    setInputFields(inputFieldsValue);
+  const removeFieldHandler = (index, id) => {
+    
+    setInputFields(inputFields.map((item) => {
+      if(item.question_id === id) {
+        const removedSubField = item;
+        removedSubField.sub_question.splice(index, 1);
+
+      }
+      return item;
+    })
+    ) 
+
   };
 
   const inputChangeHandler = (event, index) => {
@@ -109,7 +117,7 @@ function QuizForm({ setQuiz, quizTitle, setQuizTitle }) {
                     setInputFields={setInputFields}
                   />
                   <div className='btn-container'>
-                    <BsDash className='btn' onClick={() => removeFieldHandler()} />
+                    <BsDash className='btn' onClick={() => removeFieldHandler(index, inputs.question_id)} />
                     <BsPlus className='btn' onClick={() => addFieldHandler(inputs.question_id)} />
                   </div>
                 </div>

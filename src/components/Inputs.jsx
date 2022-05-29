@@ -6,8 +6,8 @@ function Inputs({ index, sub_question_title, points, inputFields, parentId, setI
     let inputValues = inputFields.map((item) => {
       if (item.question_id === id) {
 
-        const renameMeLaterErik = item;
-        renameMeLaterErik.sub_question[index][event.target.name] = event.target.value;
+        const changedSubInputValue = item;
+        changedSubInputValue.sub_question[index][event.target.name] = event.target.value;
 
         return renameMeLaterErik
       }

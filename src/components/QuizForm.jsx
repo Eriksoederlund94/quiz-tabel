@@ -14,7 +14,12 @@ import { v4 as randomId } from 'uuid';
 
 function QuizForm({ setQuiz, quizTitle, setQuizTitle }) {
   // STATE
-  const [inputFields, setInputFields] = useState(quizData);
+  const [inputFields, setInputFields] = useState([]);
+
+
+const startBtnHandler = () => {
+  setInputFields(quizData)
+}
 
   const startFormHandler = () => {
     setQuiz(inputFields);
@@ -85,11 +90,16 @@ function QuizForm({ setQuiz, quizTitle, setQuizTitle }) {
     setInputFields(inputValues);
   };
 
+  console.log(inputFields)
+
   return (
     <QuizFormWrapper>
       <div className='form-wrapper'>
-        <h1>Make your quiz</h1>
-        <input type='text' placeholder='Quiz Name' value={quizTitle} onChange={(event) =>  setQuizTitle(event.target.value)} />
+        <div className='input-container'>
+        <h1 className='title-header'>Make your quiz</h1>
+        {inputFields.length === 0 ? <button className='start-btn' onClick={startBtnHandler}>Start</button> : null}
+        {inputFields.length >= 1 ? <input className='quiz-title-input' type='text' placeholder='Quiz Name' value={quizTitle} onChange={(event) =>  setQuizTitle(event.target.value)} /> : null}
+        </div>
         {inputFields &&
           inputFields.map((inputs, index) => (
             <div className='input-container' key={inputs.question_id}>
@@ -97,7 +107,7 @@ function QuizForm({ setQuiz, quizTitle, setQuizTitle }) {
                 <input
                   type='text'
                   name='question_title'
-                  placeholder='Question'
+                  placeholder='Question Title'
                   value={inputs.question_title}
                   onChange={(event) => inputChangeHandler(event, index)}
                 />
@@ -124,7 +134,7 @@ function QuizForm({ setQuiz, quizTitle, setQuizTitle }) {
               ))}
             </div>
           ))}
-        <button onClick={startFormHandler}>Create quiz table</button>
+        {inputFields.length >= 1 ? <button className='create-btn' onClick={startFormHandler}>Create quiz table</button> : null}
       </div>
     </QuizFormWrapper>
   );
@@ -136,28 +146,65 @@ const QuizFormWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #cccccc;
+  font-family: 'Roboto', sans-serif;
+
+
+  input {
+    all: unset;
+    padding: 1rem 2rem;
+    border: solid 2px #CCC;
+  }
 
   .form-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    width: 600px
   }
 
   .input-container {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     padding: 2rem;
+    width: 600px;
 
     .question-container,
     .sub-question-container {
       display: flex;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .sub-question-container{
+      justify-content: space-between;
+
     }
 
     .btn {
       cursor: pointer;
     }
+  }
+
+
+  .quiz-title-input{
+    width: 200px;
+  }
+
+
+  .start-btn,.create-btn {
+    all: unset;
+    padding: .8rem 3rem;
+    background-color: #000;
+    color: #FFF;
+    cursor: pointer;
+    border-radius: 6px;
+    width: 120px;
+    text-align: center;
   }
 `;
 

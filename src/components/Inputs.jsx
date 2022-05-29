@@ -21,12 +21,14 @@ function Inputs({ index, sub_question_title, points, inputFields, parentId, setI
     <>
       <input
         type='text'
+        placeholder='Question'
         value={sub_question_title}
         name='sub_question_title'
         onChange={(event) => subInputChangeHandler(event, index, parentId)}
       />
       <input
         type='number'
+        placeholder='Points'
         value={points}
         name='points'
         onChange={(event) => subInputChangeHandler(event, index, parentId)}
@@ -34,5 +36,6 @@ function Inputs({ index, sub_question_title, points, inputFields, parentId, setI
     </>
   );
 }
+
 
 export default Inputs;

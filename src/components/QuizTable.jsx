@@ -2,7 +2,6 @@ import React from 'react'
 
 function QuizTable({question_title, sub_question}) {
 
-    console.log(sub_question)
   return (
     <div>
         <h1>{question_title}</h1>

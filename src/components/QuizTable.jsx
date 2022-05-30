@@ -3,8 +3,6 @@ import styled from 'styled-components'
 
 function QuizTable({question_title, sub_question}) {
 
-  const point = 'poäng'
-
 
   return (
     <QuizTableWrapper>

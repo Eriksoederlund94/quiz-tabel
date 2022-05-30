@@ -21,7 +21,7 @@ const startBtnHandler = () => {
   setInputFields(quizData)
 }
 
-  const startFormHandler = () => {
+const startFormHandler = () => {
     setQuiz(inputFields);
   };
 
@@ -105,7 +105,7 @@ const startBtnHandler = () => {
                 <input
                   type='text'
                   name='question_title'
-                  placeholder='Question Number'
+                  placeholder='Question Title'
                   value={inputs.question_title}
                   onChange={(event) => inputChangeHandler(event, index)}
                 />
@@ -151,6 +151,7 @@ const QuizFormWrapper = styled.div`
     all: unset;
     padding: 1rem 2rem;
     border: solid 2px #CCC;
+    margin: 10px;
   }
 
   .form-wrapper {
@@ -176,11 +177,6 @@ const QuizFormWrapper = styled.div`
       justify-content: center;
       align-items: center;
       margin-bottom: 1.5rem;
-    }
-
-    .sub-question-container{
-      justify-content: space-between;
-
     }
 
     .btn {

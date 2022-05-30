@@ -7,12 +7,15 @@ import QuizTable from '../components/QuizTable'
 function QuizTablePage({quiz, quizTitle}) {
 
   const [numberOfQuestions, setNumberOfQuestions] = useState(null);
+  const [totalPoints, setTotalPoints] = useState(null);
   const [title, setTitle] = useState([]);
+
 
   const totalQuestions = () => {
     const questionNumberArray = quiz.map((item) => {
       return item.sub_question.length
     })
+
 
     const highestTotalQuestionNumber = Math.max(...questionNumberArray);
 
@@ -20,7 +23,23 @@ function QuizTablePage({quiz, quizTitle}) {
   }
 
 
+  const totalPointsHandler = () => {
+
+    const totalQuizPoints = quiz.map((item) => {
+      return item.sub_question.reduce((total, item) => {
+        return total + parseInt(item.points);
+      }, 0); 
+    })
+
+
+
+    const totalPointsResult = totalQuizPoints.reduce((a, b) => a + b, 0)
+
+    setTotalPoints(totalPointsResult);
+  }
+
   useEffect(() => {
+    totalPointsHandler();
     totalQuestions();
 
     let totalQuestionsArray = []
@@ -51,6 +70,7 @@ function QuizTablePage({quiz, quizTitle}) {
         ))}
         </div> 
       </div>
+      <p>Total Points: {totalPoints}</p>
     </QuizTablePageWrapper>
   )
 }
@@ -65,7 +85,7 @@ const QuizTablePageWrapper = styled.div `
   flex-direction: column;
 
   .table-wrapper{
-    min-width: 750px
+    min-width: 200px
   }
 
   .question-point-wrapper{
@@ -95,8 +115,7 @@ const QuizTablePageWrapper = styled.div `
   .question-container{
     display: flex;
   
-    
-
+  
     p{
       margin: 0 0 0 2rem;
       padding-right: 20px;

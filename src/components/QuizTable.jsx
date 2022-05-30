@@ -33,27 +33,21 @@ const QuizTableWrapper = styled.div `
 
 .question-point-container {
   display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
+  flex-direction: row;
   align-items: flex-start;
   border-right: solid 1px #000;
   border-bottom: solid 1px #000;
   border-top: solid 1px #000;
-  height: 80px;
-
-  .question-point-container:last-child{
-   border: none;
-  }
+  height: 100px;
   
-
   p{
-      margin: 0 0 0 2rem;
+      margin: 0 0 0 6px;
       padding-right: 20px;
-      width: 100px;
+      width: 50px;  
     }
 
     p:last-child{
-      padding-right: 20px;
+     
     }
 }
 

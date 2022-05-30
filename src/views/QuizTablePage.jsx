@@ -36,15 +36,21 @@ function QuizTablePage({quiz, quizTitle}) {
 
   return (
     <QuizTablePageWrapper>
-      <h1>{quizTitle}</h1>
-      <div className='question-container'>
-        {title.map((item, index) => (
-          <p key={index}>{item}</p>
+      <div className='table-wrapper' >
+        <div className='title-number-container' > 
+          <h3>{quizTitle}</h3>
+          <div className='question-container'>
+            {title.map((item, index) => (
+              <p key={index}>{item}</p>
+            ))}
+          </div>
+        </div> 
+        <div className='question-point-wrapper' > 
+        {quiz.map((item) => (
+          < QuizTable key={item.question_id} {...item} />
         ))}
+        </div> 
       </div>
-      {quiz.map((item) => (
-        < QuizTable key={item.question_id} {...item} />
-      ))}
     </QuizTablePageWrapper>
   )
 }
@@ -58,16 +64,48 @@ const QuizTablePageWrapper = styled.div `
   font-family: 'Roboto', sans-serif;
   flex-direction: column;
 
-  // Make grid
+  .table-wrapper{
+    min-width: 750px
+  }
 
+  .question-point-wrapper{
+    display: flex;
+    flex-direction: column;
+    border: solid 2px #000;
+    border-top: none;
+    
+  }
 
+  .title-number-container {
+    display: flex;
+    border: solid 2px #000;
+    height: 40px;
+  
+    
+    h3{
+      margin: 0;
+      padding-right: 20px;
+      border-right: solid 1px #000;
+      width: 120px;
+
+    }
+    
+  }
 
   .question-container{
     display: flex;
-    width: 400px;
+  
+    
 
     p{
-      margin: 0 2rem;
+      margin: 0 0 0 2rem;
+      padding-right: 20px;
+      border-right: solid 1px #000;
+      width: 100px;
+    }
+
+    p:last-child{
+      padding-right: 20px;
     }
   }
 

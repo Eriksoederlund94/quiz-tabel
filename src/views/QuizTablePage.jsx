@@ -70,7 +70,7 @@ function QuizTablePage({quiz, quizTitle}) {
         ))}
         </div> 
       </div>
-      <p>Total Points: {totalPoints}</p>
+      <p>Antal poäng: _________ av {totalPoints} poäng</p>
     </QuizTablePageWrapper>
   )
 }

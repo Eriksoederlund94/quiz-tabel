@@ -40,6 +40,7 @@ const QuizTableWrapper = styled.div `
   align-items: flex-start;
   border-right: solid 1px #000;
   border-bottom: solid 1px #000;
+  border-top: solid 1px #000;
   height: 80px;
 
   .question-point-container:last-child{

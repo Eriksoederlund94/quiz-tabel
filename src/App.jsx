@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import styled from 'styled-components'
 
 // Views
 import QuizFormPage from './views/QuizFormPage'
@@ -14,15 +13,9 @@ function App() {
     <div className="App">
       {!quiz && <QuizFormPage setQuiz={setQuiz} quizTitle={quizTitle} setQuizTitle={setQuizTitle} /> }
       {quiz && <QuizTablePage quiz={quiz} quizTitle={quizTitle} /> }
-
-     
     </div>
   )
 }
 
-const AppWrapper = styled.div`
-
-
-`
 
 export default App

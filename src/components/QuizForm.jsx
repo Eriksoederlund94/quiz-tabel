@@ -90,8 +90,6 @@ const startBtnHandler = () => {
     setInputFields(inputValues);
   };
 
-  console.log(inputFields)
-
   return (
     <QuizFormWrapper>
       <div className='form-wrapper'>
@@ -107,7 +105,7 @@ const startBtnHandler = () => {
                 <input
                   type='text'
                   name='question_title'
-                  placeholder='Question Title'
+                  placeholder='Question Number'
                   value={inputs.question_title}
                   onChange={(event) => inputChangeHandler(event, index)}
                 />
@@ -205,6 +203,7 @@ const QuizFormWrapper = styled.div`
     border-radius: 6px;
     width: 120px;
     text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   }
 `;
 
